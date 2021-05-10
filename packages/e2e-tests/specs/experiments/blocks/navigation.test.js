@@ -132,6 +132,11 @@ async function mockAllMenusResponses(
 				matchUrlToRoute( request.url(), REST_MENU_ITEMS_ROUTES ),
 			onRequestMatch: createJSONResponse( menuItems ),
 		},
+		{
+			match: ( request ) =>
+				matchUrlToRoute( request.url(), REST_PAGES_ROUTES ),
+			onRequestMatch: createJSONResponse( [] ),
+		},
 	] );
 }
 
@@ -165,7 +170,7 @@ async function mockCreatePageResponse( title, slug ) {
 			match: ( request ) =>
 				request.url().includes( `rest_route` ) &&
 				request.url().includes( `pages` ) &&
-				request.method() === 'POST',
+				( request.method() === 'POST' || request.method() === 'GET' ), // Add mocking for single page requests
 			onRequestMatch: createJSONResponse( page ),
 		},
 	] );
@@ -406,6 +411,20 @@ describe( 'Navigation', () => {
 	} );
 
 	it( 'allows an empty navigation block to be created and manually populated using a mixture of internal and external links', async () => {
+		await mockPagesResponse( [
+			{
+				title: 'Home',
+				slug: 'home',
+			},
+			{
+				title: 'About',
+				slug: 'about',
+			},
+			{
+				title: 'Contact Us',
+				slug: 'contact',
+			},
+		] );
 		// Add the navigation block.
 		await insertBlock( 'Navigation' );
 
@@ -469,6 +488,20 @@ describe( 'Navigation', () => {
 	} );
 
 	it( 'encodes URL when create block if needed', async () => {
+		await mockPagesResponse( [
+			{
+				title: 'Home',
+				slug: 'home',
+			},
+			{
+				title: 'About',
+				slug: 'about',
+			},
+			{
+				title: 'Contact Us',
+				slug: 'contact',
+			},
+		] );
 		// Add the navigation block.
 		await insertBlock( 'Navigation' );
 
@@ -633,11 +666,10 @@ describe( 'Navigation', () => {
 		await createNavBlockWithAllPages();
 		await insertBlock( 'Navigation' );
 		await createNavBlockWithAllPages();
+
 		await turnResponsivenessOn();
 
-		await previewPage.reload( {
-			waitFor: [ 'networkidle0', 'domcontentloaded' ],
-		} );
+		await previewPage.reload();
 
 		/*
 			Count instances of the tag to make sure that it's been loaded only once,
@@ -653,6 +685,8 @@ describe( 'Navigation', () => {
 		);
 
 		expect( tagCount ).toBe( 1 );
+
+		await previewPage.close(); // Closing to avoid polluting the browser window when debugging in non-headless mode.
 	} );
 
 	it.skip( 'loads frontend code only if responsiveness is turned on', async () => {
@@ -689,9 +723,7 @@ describe( 'Navigation', () => {
 
 		await turnResponsivenessOn();
 
-		await previewPage.reload( {
-			waitFor: [ 'networkidle0', 'domcontentloaded' ],
-		} );
+		await previewPage.reload();
 
 		isScriptLoaded = await previewPage.evaluate(
 			() =>
