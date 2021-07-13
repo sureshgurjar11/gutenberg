@@ -1,7 +1,11 @@
 /**
  * WordPress dependencies
  */
-import { CardBody, ItemGroup, Text } from '@wordpress/components';
+import {
+	CardBody,
+	ItemGroup,
+	__experimentalText as Text,
+} from '@wordpress/components';
 
 /**
  * Internal dependencies

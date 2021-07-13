@@ -46,6 +46,10 @@ export {
 	CompositeItem as __unstableCompositeItem,
 	useCompositeState as __unstableUseCompositeState,
 } from './composite';
+export {
+	ContextSystemProvider as __experimentalContextSystemProvider,
+	useContextSystem as __experimentalUseContextSystem,
+} from './ui/context';
 export { default as CustomSelectControl } from './custom-select-control';
 export { default as Dashicon } from './dashicon';
 export { default as DateTimePicker, DatePicker, TimePicker } from './date-time';
@@ -92,9 +96,7 @@ export { default as __experimentalNavigationBackButton } from './navigation/back
 export { default as __experimentalNavigationGroup } from './navigation/group';
 export { default as __experimentalNavigationItem } from './navigation/item';
 export { default as __experimentalNavigationMenu } from './navigation/menu';
-
 export * from './navigator';
-
 export { default as Notice } from './notice';
 export { default as __experimentalNumberControl } from './number-control';
 export { default as NoticeList } from './notice/list';
@@ -147,6 +149,7 @@ export {
 	useCustomUnits as __experimentalUseCustomUnits,
 	parseUnit as __experimentalParseUnit,
 } from './unit-control';
+export { View as __experimentalView } from './view';
 export { default as VisuallyHidden } from './visually-hidden';
 export { VStack as __experimentalVStack } from './v-stack';
 export { default as IsolatedEventContainer } from './isolated-event-container';
