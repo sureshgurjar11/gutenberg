@@ -441,7 +441,13 @@ export class ImageEdit extends Component {
 
 	onSetFeatured( mediaId ) {
 		const { closeSettingsBottomSheet } = this.props;
-		setFeaturedImage( mediaId );
+		// Rather than updating the Native Store, update the Js Store instead. The
+		// subscription in the Editor will persist to native when the featured image
+		// changes.
+		const { postType, postId } = this.props.context;
+		this.props.editEntityRecord( 'postType', postType, postId, {
+			featured_media: mediaId,
+		} );
 		closeSettingsBottomSheet();
 	}
 
@@ -712,7 +718,9 @@ export default compose( [
 		};
 	} ),
 	withDispatch( ( dispatch ) => {
+		const { editEntityRecord } = dispatch( coreStore );
 		return {
+			editEntityRecord,
 			closeSettingsBottomSheet() {
 				dispatch( editPostStore ).closeGeneralSidebar();
 			},

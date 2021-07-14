@@ -74,6 +74,7 @@
 			"attribute": "target"
 		}
 	},
+	"usesContext": [ "postType", "postId" ],
 	"supports": {
 		"anchor": true,
 		"color": {

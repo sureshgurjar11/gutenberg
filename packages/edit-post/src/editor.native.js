@@ -16,6 +16,7 @@ import { compose } from '@wordpress/compose';
 import {
 	subscribeSetFocusOnTitle,
 	subscribeFeaturedImageIdNativeUpdated,
+	setFeaturedImage,
 } from '@wordpress/react-native-bridge';
 import { SlotFillProvider } from '@wordpress/components';
 import { store as coreStore } from '@wordpress/core-data';
@@ -91,13 +92,34 @@ class Editor extends Component {
 			}
 		);
 
+		// If we are to rely upon the "persist to native on change" approach below
+		// in componentDidUpdate, a `subscribeFeaturedImageIdNativeUpdated`
+		// subscription may be duplicative or unnecessary. In this exploratory work,
+		// the subscription causes unnecessary bridge trips and re-renders.
 		this.subscriptionParentFeaturedImageIdNativeUpdated = subscribeFeaturedImageIdNativeUpdated(
 			( payload ) => {
+				console.log( '>>> NATIVE => JS' );
 				editEntityRecord( 'postType', postType, postId, {
 					featured_media: payload.featuredImageId,
 				} );
 			}
 		);
+	}
+
+	componentDidUpdate( prevProps ) {
+		const currentFeaturedImageId = this.props.featuredImageId;
+		const previousFeaturedImageId = prevProps.featuredImageId;
+		console.log( '>>> Editor.cDU featuredImageId', {
+			current: this.props.featuredImageId,
+			previous: prevProps.featuredImageId,
+		} );
+
+		// If featured image changes, persist the change to the Native Store.
+		// This location may not be the best for this logic.
+		if ( currentFeaturedImageId !== previousFeaturedImageId ) {
+			console.log( '>>> JS => NATIVE' );
+			setFeaturedImage( currentFeaturedImageId );
+		}
 	}
 
 	componentWillUnmount() {
@@ -180,11 +202,14 @@ export default compose( [
 			__experimentalGetPreviewDeviceType,
 		} = select( editPostStore );
 		const { getBlockTypes } = select( blocksStore );
+		const { getEditedPostAttribute } = select( 'core/editor' );
+		const featuredImageId = getEditedPostAttribute( 'featured_media' );
 
 		return {
 			hasFixedToolbar:
 				isFeatureActive( 'fixedToolbar' ) ||
 				__experimentalGetPreviewDeviceType() !== 'Desktop',
+			featuredImageId,
 			focusMode: isFeatureActive( 'focusMode' ),
 			mode: getEditorMode(),
 			hiddenBlockTypes: getPreference( 'hiddenBlockTypes' ),
