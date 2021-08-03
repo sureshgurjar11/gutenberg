@@ -157,11 +157,18 @@ async function getSerializedBlocks() {
 	);
 }
 
+// async function setUpNavigationEditorMocks( mocks ) {
+// 	if ( ! mocks ) {
+// 		await setUpResponseMocking( [] );
+// 	}
+// 	await setUpResponseMocking( mocks );
+// }
+
 describe( 'Navigation editor', () => {
 	useExperimentalFeatures( [ '#gutenberg-navigation' ] );
 
 	afterEach( async () => {
-		await setUpResponseMocking( [] );
+		// await setUpResponseMocking( [] );
 	} );
 
 	it( 'allows creation of a menu when there are no current menu items', async () => {
@@ -430,7 +437,7 @@ describe( 'Navigation editor', () => {
 		} );
 
 		afterEach( async () => {
-			await setUpResponseMocking( [] );
+			// await setUpResponseMocking( [] );
 		} );
 
 		it( 'is displayed in inspector additions', async () => {
@@ -543,7 +550,7 @@ describe( 'Navigation editor', () => {
 		} );
 
 		afterEach( async () => {
-			await setUpResponseMocking( [] );
+			// await setUpResponseMocking( [] );
 		} );
 
 		async function assertIsDirty( isDirty ) {
