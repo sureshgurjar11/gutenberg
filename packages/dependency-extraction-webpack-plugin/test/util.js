@@ -50,7 +50,7 @@ describe( 'defaultRequestToExternal', () => {
 
 	test( 'Handles framer-motion request', () => {
 		expect( defaultRequestToExternal( 'framer-motion' ) ).toBe(
-			'FramerMotion'
+			'Motion'
 		);
 	} );
 } );

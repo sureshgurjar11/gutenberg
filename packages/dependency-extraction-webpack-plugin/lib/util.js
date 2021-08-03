@@ -18,7 +18,7 @@ function defaultRequestToExternal( request ) {
 			return request;
 
 		case 'framer-motion':
-			return 'FramerMotion';
+			return 'Motion';
 
 		case '@babel/runtime/regenerator':
 			return 'regeneratorRuntime';
