@@ -49,9 +49,7 @@ describe( 'defaultRequestToExternal', () => {
 	} );
 
 	test( 'Handles framer-motion request', () => {
-		expect( defaultRequestToExternal( 'framer-motion' ) ).toBe(
-			'Motion'
-		);
+		expect( defaultRequestToExternal( 'framer-motion' ) ).toBe( 'Motion' );
 	} );
 } );
 
