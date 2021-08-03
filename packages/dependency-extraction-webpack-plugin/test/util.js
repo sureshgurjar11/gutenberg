@@ -47,6 +47,12 @@ describe( 'defaultRequestToExternal', () => {
 			defaultRequestToExternal( '@wordpress/some-future-package' )
 		).toEqual( [ 'wp', 'someFuturePackage' ] );
 	} );
+
+	test( 'Handles framer-motion request', () => {
+		expect( defaultRequestToExternal( 'framer-motion' ) ).toBe(
+			'FramerMotion'
+		);
+	} );
 } );
 
 describe( 'defaultRequestToHandle', () => {

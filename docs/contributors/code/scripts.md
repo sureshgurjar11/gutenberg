@@ -45,12 +45,13 @@ The editor includes a number of packages to enable various pieces of functionali
 
 The editor also uses some popular third-party packages and scripts. Plugin developers can use these scripts as well without bundling them in their code (and increasing file sizes).
 
-| Script Name                                          | Handle    | Description                                                                                           |
-| ---------------------------------------------------- | --------- | ----------------------------------------------------------------------------------------------------- |
-| [React](https://reactjs.org)                         | react     | React is a JavaScript library for building user interfaces                                            |
-| [React Dom](https://reactjs.org/docs/react-dom.html) | react-dom | Serves as the entry point to the DOM and server renderers for React, intended to be paired with React |
-| [Moment](https://momentjs.com/)                      | moment    | Parse, validate, manipulate, and display dates and times in JavaScript                                |
-| [Lodash](https://lodash.com)                         | lodash    | Lodash is a JavaScript library which provides utility functions for common programming tasks          |
+| Script Name                                          | Handle        | Description                                                                                           |
+| ---------------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------- |
+| [React](https://reactjs.org)                         | react         | React is a JavaScript library for building user interfaces                                            |
+| [React Dom](https://reactjs.org/docs/react-dom.html) | react-dom     | Serves as the entry point to the DOM and server renderers for React, intended to be paired with React |
+| [Moment](https://momentjs.com/)                      | moment        | Parse, validate, manipulate, and display dates and times in JavaScript                                |
+| [Lodash](https://lodash.com)                         | lodash        | Lodash is a JavaScript library which provides utility functions for common programming tasks          |
+| [Framer Motion](https://www.framer.com/docs/)        | framer-motion | Use Framer Motion to create animated, interactive interfaces                                          |
 
 ## Polyfill Scripts
 

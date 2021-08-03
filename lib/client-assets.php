@@ -235,6 +235,18 @@ function gutenberg_register_vendor_scripts( $scripts ) {
 		array(),
 		'2.3.5'
 	);
+
+	/*
+	 * This script registration and the corresponding function should be removed
+	 * removed once the plugin is updated to support WordPress 5.9.0 and newer.
+	 */
+	gutenberg_register_vendor_script(
+		$scripts,
+		'framer-motion',
+		'https://unpkg.com/framer-motion@4.1.17/dist/framer-motion.js',
+		array( 'react' ),
+		'4.1.17'
+	);
 }
 add_action( 'wp_default_scripts', 'gutenberg_register_vendor_scripts' );
 
