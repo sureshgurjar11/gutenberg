@@ -157,19 +157,8 @@ async function getSerializedBlocks() {
 	);
 }
 
-// async function setUpNavigationEditorMocks( mocks ) {
-// 	if ( ! mocks ) {
-// 		await setUpResponseMocking( [] );
-// 	}
-// 	await setUpResponseMocking( mocks );
-// }
-
 describe( 'Navigation editor', () => {
 	useExperimentalFeatures( [ '#gutenberg-navigation' ] );
-
-	afterEach( async () => {
-		// await setUpResponseMocking( [] );
-	} );
 
 	it( 'allows creation of a menu when there are no current menu items', async () => {
 		const menuPostResponse = {
@@ -436,10 +425,6 @@ describe( 'Navigation editor', () => {
 			await page.waitForSelector( '.edit-navigation-sidebar' );
 		} );
 
-		afterEach( async () => {
-			// await setUpResponseMocking( [] );
-		} );
-
 		it( 'is displayed in inspector additions', async () => {
 			const nameControl = await page.$( nameEditorSelector );
 			expect( nameControl ).toBeDefined();
@@ -547,10 +532,6 @@ describe( 'Navigation editor', () => {
 			] );
 
 			await visitNavigationEditor();
-		} );
-
-		afterEach( async () => {
-			// await setUpResponseMocking( [] );
 		} );
 
 		async function assertIsDirty( isDirty ) {
